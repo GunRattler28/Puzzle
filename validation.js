@@ -1,6 +1,8 @@
 const form = document.getElementById('form');
 const inputGroup = document.querySelector('.input-group');
-const hiddenImg = document.getElementById('hiddenImg');
+const backgroundContainer = document.getElementById('background');
+
+const backgrounds = ['images/Differently.jpg', 'images/lookCloser.png'];
 
 async function sha256(message) {
   const encoder = new TextEncoder();
@@ -8,6 +10,10 @@ async function sha256(message) {
   const hashBuffer = await crypto.subtle.digest('SHA-256', data);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function changeBackground(newBackground) {
+  backgroundContainer.style.backgroundImage = `url(${newBackground})`;
 }
 
 form.addEventListener('submit', async (e) => {
@@ -26,12 +32,12 @@ form.addEventListener('submit', async (e) => {
     alert('✅ Correct password.');
     inputGroup.classList.remove('incorrect');
     inputGroup.classList.add('correct');
-    document.body.classList.add('reveal');
+    changeBackground(backgrounds[1]);
   } else if (hashedPassword === realPart2) {
     alert('✅ Correct password.');
     inputGroup.classList.remove('incorrect');
     inputGroup.classList.add('correct');
-    document.body.classList.remove('reveal');
+    changeBackground(backgrounds[0]);
   } else {
     alert('❌ Incorrect password.');
     inputGroup.classList.remove('correct');
