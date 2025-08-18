@@ -13,7 +13,10 @@ async function sha256(message) {
 }
 
 function changeBackground(newBackground) {
-  backgroundContainer.style.backgroundImage = `url(${newBackground})`;
+  backgroundContainer.style.backgroundImage = `url('${newBackground}')`;
+  backgroundContainer.style.backgroundSize = "cover";
+  backgroundContainer.style.backgroundPosition = "center";
+  backgroundContainer.style.backgroundRepeat = "no-repeat";
 }
 
 form.addEventListener('submit', async (e) => {
