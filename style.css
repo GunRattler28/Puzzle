@@ -32,10 +32,6 @@ html {
   justify-content: center;
 }
 
-.password {
-  font-size: 24 px;
-}
-
 .background {
   flex: 0 0 40%;
   position: relative;
@@ -120,7 +116,7 @@ form input {
   flex-grow: 1;
   min-width: 0;
   height: 50px;
-  padding: 1em;
+  padding: 0 1em;
   font: inherit;
   border: none;
   outline: none;

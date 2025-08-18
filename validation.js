@@ -22,6 +22,8 @@ function changeBackground(newLayer) {
   const fadeIn = newLayer === 1 ? layer1 : layer2;
   fadeOut.style.opacity = 0;
   fadeIn.style.opacity = 1;
+  layer1.style.pointerEvents = newLayer === 1 ? 'auto' : 'none';
+  layer2.style.pointerEvents = newLayer === 2 ? 'auto' : 'none';
   activeLayer = newLayer;
 }
 
