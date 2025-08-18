@@ -32,6 +32,10 @@ html {
   justify-content: center;
 }
 
+.password {
+  font-size: 24 px;
+}
+
 .background {
   flex: 0 0 40%;
   position: relative;
