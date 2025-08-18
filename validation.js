@@ -48,12 +48,15 @@ form.addEventListener('submit', async (e) => {
   const realPart1 = '7cb89be263253e2196661f303926cfb1bc662a607220486a69266dffb737af02';
   const realPart2 = '37766da024061aa60ba872415624f3bebd11d877d0fe098433c5948cccb7c6a8';
 
-  if (hashedPassword === realPart1) {
+  let passwordDone = 0;
+
+  if ((hashedPassword === realPart1) && passwordDone === 0) {
     alert('✅ Correct password.');
     inputGroup.classList.remove('incorrect');
     inputGroup.classList.add('correct');
     changeBackground(backgrounds[1]);
-  } else if (hashedPassword === realPart2) {
+    passwordDone += 1;
+  } else if ((hashedPassword === realPart2) && passwordDone === 1) {
     alert('✅ Correct password.');
     inputGroup.classList.remove('incorrect');
     inputGroup.classList.add('correct');

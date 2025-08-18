@@ -40,7 +40,7 @@ html {
   position: relative;
   height: 100vh;
   overflow: hidden;
-  transition: opacity 0.8s ease;
+  transition: opacity 2s ease;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
