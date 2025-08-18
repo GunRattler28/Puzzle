@@ -1,8 +1,23 @@
 const form = document.getElementById('form');
 const inputGroup = document.querySelector('.input-group');
-const backgroundContainer = document.getElementById('background');
 
 const backgrounds = ['images/Differently.jpg', 'images/lookCloser.png'];
+
+for (let i = 0; i < backgrounds.length; i++) {
+  const img = new Image();
+  img.src = backgrounds[i];
+}
+
+
+const layer1 = document.getElementById('bg1');
+const layer2 = document.getElementById('bg2');
+let activeLayer = 1;
+let currentBackgroundIndex = 0;
+
+layer1.style.backgroundImage = `url('${backgrounds[0]}')`;
+layer1.style.opacity = 1;
+layer2.style.backgroundImage = `url('${backgrounds[1]}')`;
+layer2.style.opacity = 0;
 
 async function sha256(message) {
   const encoder = new TextEncoder();
@@ -13,10 +28,12 @@ async function sha256(message) {
 }
 
 function changeBackground(newBackground) {
-  backgroundContainer.style.backgroundImage = `url('${newBackground}')`;
-  backgroundContainer.style.backgroundSize = "cover";
-  backgroundContainer.style.backgroundPosition = "center";
-  backgroundContainer.style.backgroundRepeat = "no-repeat";
+  const fadeOutLayer = activeLayer === 1 ? layer1 : layer2;
+  const fadeInLayer = activeLayer === 1 ? layer2 : layer1;
+  fadeInLayer.style.backgroundImage = `url('${newBackground}')`;
+  fadeOutLayer.style.opacity = 0;
+  fadeInLayer.style.opacity = 1;
+  activeLayer = activeLayer === 1 ? 2 : 1;
 }
 
 form.addEventListener('submit', async (e) => {
