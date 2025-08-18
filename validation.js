@@ -9,6 +9,8 @@ let passwordDone = 0;
 layer1.style.opacity = 1;
 layer2.style.opacity = 0;
 
+layer1.classList.add('active');
+
 async function sha256(message) {
   const encoder = new TextEncoder();
   const data = encoder.encode(message);
@@ -17,13 +19,15 @@ async function sha256(message) {
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
+
 function changeBackground(newLayer) {
-  const fadeOut = activeLayer === 1 ? layer1 : layer2;
+  layer1.classList.remove('active');
+  layer2.classList.remove('active');
   const fadeIn = newLayer === 1 ? layer1 : layer2;
+  const fadeOut = activeLayer === 1 ? layer1 : layer2;
   fadeOut.style.opacity = 0;
   fadeIn.style.opacity = 1;
-  layer1.style.pointerEvents = newLayer === 1 ? 'auto' : 'none';
-  layer2.style.pointerEvents = newLayer === 2 ? 'auto' : 'none';
+  fadeIn.classList.add('active');
   activeLayer = newLayer;
 }
 
@@ -55,4 +59,12 @@ form.addEventListener('submit', async (e) => {
     inputGroup.classList.remove('correct');
     inputGroup.classList.add('incorrect');
   }
+});
+
+layer1.addEventListener('click', (e) => {
+  if (!layer1.classList.contains('active')) e.preventDefault();
+});
+
+layer2.addEventListener('click', (e) => {
+  if (!layer2.classList.contains('active')) e.preventDefault();
 });
