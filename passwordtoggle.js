@@ -5,6 +5,7 @@ const passwordType = document.getElementById('password');
 const eyeIcon = document.getElementById('eye')
 
 button.addEventListener("click", () => {
+  e.preventDefault();
   if (passwordType.type === "password") {
     passwordType.type = "text";
     eyeIcon.className = "bi bi-eye"

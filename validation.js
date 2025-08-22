@@ -8,8 +8,12 @@ let passwordDone = 0;
 
 layer1.style.opacity = 1;
 layer2.style.opacity = 0;
-
 layer1.classList.add('active');
+
+const realPasswords = [
+  '7cb89be263253e2196661f303926cfb1bc662a607220486a69266dffb737af02',
+  '37766da024061aa60ba872415624f3bebd11d877d0fe098433c5948cccb7c6a8'
+];
 
 async function sha256(message) {
   const encoder = new TextEncoder();
@@ -18,7 +22,6 @@ async function sha256(message) {
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
-
 
 function changeBackground(newLayer) {
   layer1.classList.remove('active');
@@ -34,37 +37,28 @@ function changeBackground(newLayer) {
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  const password = document.getElementById('password').value;
-  const capitalPassword = password.split(' ')
+  const password = document.getElementById('password').value.trim();
+  const capitalPassword = password
+    .split(' ')
     .map(w => w[0].toUpperCase() + w.substring(1).toLowerCase())
     .join(' ');
 
   const hashedPassword = await sha256(capitalPassword);
-  const realPart1 = '7cb89be263253e2196661f303926cfb1bc662a607220486a69266dffb737af02';
-  const realPart2 = '37766da024061aa60ba872415624f3bebd11d877d0fe098433c5948cccb7c6a8';
+  const currentHash = realPasswords[passwordDone];
 
-  if ((hashedPassword === realPart1) && passwordDone === 0) {
+  if (hashedPassword === currentHash) {
     alert('✅ Correct password.');
-    inputGroup.classList.remove('incorrect');
-    inputGroup.classList.add('correct');
-    changeBackground(2);
+    inputGroup.className = 'input-group correct';
+    changeBackground(passwordDone === 0 ? 2 : 1);
     passwordDone += 1;
-  } else if ((hashedPassword === realPart2) && passwordDone === 1) {
-    alert('✅ Correct password.');
-    inputGroup.classList.remove('incorrect');
-    inputGroup.classList.add('correct');
-    changeBackground(1);
   } else {
     alert('❌ Incorrect password.');
-    inputGroup.classList.remove('correct');
-    inputGroup.classList.add('incorrect');
+    inputGroup.className = 'input-group incorrect';
   }
 });
 
-layer1.addEventListener('click', (e) => {
-  if (!layer1.classList.contains('active')) e.preventDefault();
-});
-
-layer2.addEventListener('click', (e) => {
-  if (!layer2.classList.contains('active')) e.preventDefault();
+[layer1, layer2].forEach(layer => {
+  layer.addEventListener('click', (e) => {
+    if (!layer.classList.contains('active')) e.preventDefault();
+  });
 });
