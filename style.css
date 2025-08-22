@@ -118,7 +118,7 @@ form label {
 }
 
 form label i {
-  color: var(--base-color);
+  color: var(--text-color);
 }
 
 form input {
