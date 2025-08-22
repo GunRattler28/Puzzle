@@ -117,6 +117,10 @@ form label {
   transition: background-color 0.2s ease;
 }
 
+form label i {
+  color: var(--base-color);
+}
+
 form input {
   flex-grow: 1;
   min-width: 0;
