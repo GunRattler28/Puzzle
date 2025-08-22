@@ -2,6 +2,7 @@ const form = document.getElementById('form');
 const inputGroup = document.querySelector('.input-group');
 const layer1 = document.getElementById('link1');
 const layer2 = document.getElementById('link2');
+layer1.classList.add('active');
 let activeLayer = 1;
 let passwordDone = 0;
 
@@ -20,16 +21,12 @@ async function sha256(message) {
 }
 
 function changeBackground(newLayer) {
-  layer1.classList.remove('active');
-  layer2.classList.remove('active');
   const fadeIn = newLayer === 1 ? layer1 : layer2;
-  const fadeOut = activeLayer === 1 ? layer1 : layer2;
-  fadeOut.style.opacity = 0;
-  fadeIn.style.opacity = 1;
+  const fadeOut = newLayer === 1 ? layer2 : layer1;
   fadeIn.classList.add('active');
+  fadeOut.classList.remove('active');
   activeLayer = newLayer;
 }
-
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const password = document.getElementById('password').value.trim();
