@@ -4,7 +4,7 @@ const button = document.getElementById('togglePassword');
 const passwordType = document.getElementById('password');
 const eyeIcon = document.getElementById('eye')
 
-button.addEventListener("click", () => {
+button.addEventListener("click", (e) => {
   e.preventDefault();
   if (passwordType.type === "password") {
     passwordType.type = "text";
