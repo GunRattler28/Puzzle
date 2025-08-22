@@ -1,6 +1,5 @@
 const form = document.getElementById('form');
 const inputGroup = document.querySelector('.input-group');
-
 const layer1 = document.getElementById('link1');
 const layer2 = document.getElementById('link2');
 let activeLayer = 1;
@@ -16,11 +15,8 @@ const realPasswords = [
 ];
 
 async function sha256(message) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(message);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  const buffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(message));
+  return Array.from(new Uint8Array(buffer)).map(b => b.toString(16).padStart(2,'0')).join('');
 }
 
 function changeBackground(newLayer) {
@@ -36,13 +32,8 @@ function changeBackground(newLayer) {
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
-
   const password = document.getElementById('password').value.trim();
-  const capitalPassword = password
-    .split(' ')
-    .map(w => w[0].toUpperCase() + w.substring(1).toLowerCase())
-    .join(' ');
-
+  const capitalPassword = password.split(' ').map(w => w[0].toUpperCase() + w.slice(1).toLowerCase()).join(' ');
   const hashedPassword = await sha256(capitalPassword);
   const currentHash = realPasswords[passwordDone];
 
@@ -58,7 +49,7 @@ form.addEventListener('submit', async (e) => {
 });
 
 [layer1, layer2].forEach(layer => {
-  layer.addEventListener('click', (e) => {
+  layer.addEventListener('click', e => {
     if (!layer.classList.contains('active')) e.preventDefault();
   });
 });

@@ -1,16 +1,11 @@
-console.log("Et tu brute?")
+const toggleBtn = document.getElementById('togglePassword');
+const passwordInput = document.getElementById('password');
+const eyeIcon = toggleBtn.querySelector('i');
 
-const button = document.getElementById('togglePassword');
-const passwordType = document.getElementById('password');
-const eyeIcon = document.getElementById('eye')
-
-button.addEventListener("click", (e) => {
+toggleBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  if (passwordType.type === "password") {
-    passwordType.type = "text";
-    eyeIcon.className = "bi bi-eye"
-  } else {
-    passwordType.type = "password";
-    eyeIcon.className = "bi bi-eye-slash"
-  }
-})
+  const isPassword = passwordInput.type === 'password';
+  passwordInput.type = isPassword ? 'text' : 'password';
+  eyeIcon.classList.toggle('bi-eye');
+  eyeIcon.classList.toggle('bi-eye-slash');
+});

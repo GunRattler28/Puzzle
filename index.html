@@ -5,43 +5,35 @@
   <title>Maracoose</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline';">
-  <link href="style.css" rel="stylesheet" type="text/css">
+      content="default-src 'self';
+               script-src 'self';
+               style-src 'self' https://fonts.googleapis.com https://cdn.jsdelivr.net 'unsafe-inline';
+               font-src 'self' https://fonts.gstatic.com;
+               img-src 'self' data:;">
+  <link href="style.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 <body>
   <div class="container">
     <div class="wrapper">
-      <pre id="code">
-Lnh4bCBtdGFtIGx4clgKLmx4YXZ0eG0gbXRhbSBkaGh1IFQKLmx4Zmh2ZX
-hwIG10YW0gbWt0eGEgVAoubGR0eGlsIG10YW0gYW1uaGYgVAoueHZ0eGkg
-Z2Igd3hreHl5aCB3Z3RhIFQKLmxreHdibGdodiBtdGFtIHdnYmYgVAoKLG
-1hemJleHcgcmt0Z2JlbnYgdCAsd3h4bCByZ2JtIHQgZidCCi5tYXpia3Ug
-d2d0IHJtbW5nIGFtaHUgLGtob3RleSB6Z2J3d1QKLHh2dGt1ZnggbCdlYm
-gga2ggLHd0eGt1IGdiIHdnbmh5IHh1IGd0diBCCi54bHR2IHJ6a3hlZXQg
-d2hoeSB0ICxnaGJtdnR4ayB0IHhsbnR2IGx4ZmJteGZobCB3Z1Q=
-      </pre>
+      <pre id="code"> ... </pre>
       <h1>Password</h1>
       <form id="form">
         <div class="input-group">
-          <label for="password">  
-            <i class="bi bi-lock-fill" style="font-size: 24px; color: #000000;"></i>
+          <label for="password">
+            <i class="bi bi-lock-fill"></i>
           </label>
-          <input type="password" id="password" name="password" class="password" placeholder="Password">
+          <input type="password" id="password" placeholder="Password">
           <button type="button" id="togglePassword" aria-label="Toggle Password Visibility">
             <i id="eye" class="bi bi-eye-slash"></i>
           </button>
         </div>
-        <button id="submit" type="submit">Submit</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
-    <div id="background" class="background">
-      <a id="link1" href="images/Differently.jpg" target="_blank" style="opacity:1;">
-        <img src="images/Differently.jpg" class="bg-layer">
-      </a>
-      <a id="link2" href="images/lookCloser.png" target="_blank" style="opacity:0;">
-        <img src="images/lookCloser.png" class="bg-layer">
-      </a>
+    <div class="background">
+      <a id="link1" href="images/Differently.jpg" target="_blank"><img src="images/Differently.jpg" class="bg-layer"></a>
+      <a id="link2" href="images/lookCloser.png" target="_blank"><img src="images/lookCloser.png" class="bg-layer"></a>
     </div>
   </div>
   <script src="passwordtoggle.js"></script>
