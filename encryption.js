@@ -1,22 +1,31 @@
-let bcrypt = require('bcryptjs');
-let realPassword = "Oui Oui Baguette";
+const SALT = "goesBRR";
 
-bcrypt.genSalt(16, (err, salt) => {
-    bcrypt.hash(realPassword, salt, (err, hash) => {
-        console.log(hash);
-    })
-})
+async function sha256(message) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(message);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
 
-// async function sha256(message) {
-//   const encoder = new TextEncoder();
-//   const data = encoder.encode(message);
-//   const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-//   const hashArray = Array.from(new Uint8Array(hashBuffer));
-//   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-// }
+async function hashWithSalt(input) {
+  const saltedInput = SALT + input;
+  return await sha256(saltedInput);
+}
 
-// const capitalPassword = password.split(' ')
-//     .map(w => w[0].toUpperCase() + w.substring(1).toLowerCase())
-//     .join(' ');
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('form');
+  const passwordField = document.getElementById('password');
 
-// const hashedPassword = await sha256(capitalPassword);
+  if (!form || !passwordField) {
+    console.error("Form or password field not found.");
+    return;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const password = passwordField.value.trim();
+    const saltedHash = await hashWithSalt(password);
+    console.log("Salted SHA-256 Hash:", saltedHash);
+  });
+});
