@@ -47,14 +47,23 @@ html {
   height: 100%;
   display: block;
   opacity: 0;
-  transition: opacity 2s ease;
+  visibility: hidden; 
+  transition: opacity 2s ease, visibility 0s linear 2s;
   pointer-events: none;
   z-index: 0;
 }
 
 .background a.active {
   opacity: 1;
+  visibility: visible;
+  transition: opacity 2s ease;
   pointer-events: auto;
+  z-index: 1;
+}
+
+.background a:first-child {
+  opacity: 1;
+  visibility: visible;
   z-index: 1;
 }
 
