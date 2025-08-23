@@ -163,8 +163,9 @@ form input {
 
 .input-group button:hover,
 .input-group button:focus {
-  background-color: var(--text-color);
-  color: var(--base-color);
+  background-color: var(--accent-color); 
+  border-color: var(--text-color);
+  color: var(--text-color);
 }
 
 .input-group.correct {
