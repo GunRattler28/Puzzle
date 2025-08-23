@@ -127,3 +127,12 @@ form input {
   white-space: pre-wrap; text-align: center;
   font-size: 1rem; overflow: auto;
 }
+
+button, .input-group button, #submit {
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+button:hover, .input-group button:hover, #submit:hover {
+  background: var(--text-color);
+  color: var(--base-color)
+}
