@@ -154,6 +154,11 @@ form input {
   color: var(--base-color);
 }
 
+#eye:hover {
+  background: var(--text-color);
+  color: var(--base-color);
+}
+
 #code {
   color: transparent;
   user-select: text;
