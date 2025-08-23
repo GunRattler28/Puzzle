@@ -39,25 +39,35 @@ html {
 }
 
 .background a {
-  position: absolute; inset: 0;
+  position: absolute;
+  inset: 0;
   display: block;
-  opacity: 0; visibility: hidden;
+  opacity: 0;
+  visibility: hidden;
   transition: opacity 4s ease, visibility 0s linear 4s;
   pointer-events: none;
   z-index: 0;
 }
+
 .background a.active {
-  opacity: 1; visibility: visible;
+  opacity: 1;
+  visibility: visible;
   transition: opacity 4s ease;
-  pointer-events: auto; z-index: 1;
+  pointer-events: auto;
+  z-index: 1;
 }
+
 .background a:first-child {
-  opacity: 1; visibility: visible; z-index: 1;
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
 }
 
 .background img, .bg-layer {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -70,11 +80,15 @@ h1 {
 form {
   width: min(400px, 100%);
   margin: 20px 0 50px;
-  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 .input-group {
-  display: flex; width: 100%;
+  display: flex;
+  width: 100%;
   border: 2px solid var(--accent-color);
   border-radius: 10px;
   overflow: hidden;
@@ -87,52 +101,76 @@ form label, .input-group button {
   width: 50px; height: 50px;
   background: var(--accent-color);
   display: flex; justify-content: center; align-items: center;
-  font-size: 24px; border: none; transition: background 0.2s ease;
+  font-size: 24px; border: none; transition: background 0.2s ease, color 0.2s ease;
 }
 form label i, .input-group button i { color: var(--text-color); }
 
 form input {
-  flex: 1; min-width: 0;
-  height: 50px; padding: 0 1em;
-  font: inherit; border: none; outline: none;
+  flex: 1;
+  min-width: 0;
+  height: 50px;
+  padding: 0 1em;
+  font: inherit;
+  border: none;
+  outline: none;
   background: var(--input-color);
 }
 
 .input-group button { cursor: pointer; }
 .input-group button:hover, .input-group button:focus {
-  border-color: var(--text-color);
+  background: var(--text-color);
+  color: var(--base-color);
 }
 
 .input-group.correct { border-color: #0f0; }
 .input-group.correct label, .input-group.correct button {
-  background: #0f0; color: var(--text-color);
+  background: #0f0;
+  color: var(--text-color);
 }
 
 .input-group.incorrect { border-color: #f00; }
-.input-group.incorrect label, .input-group.incorrect button, 
-.input-group.incorrect i { background: #f00; color: var(--base-color); }
+.input-group.incorrect label,
+.input-group.incorrect button,
+.input-group.incorrect i {
+  background: #f00;
+  color: var(--base-color);
+}
 
 #submit {
-  margin-top: 10px; padding: .85em 4em;
-  border: none; border-radius: 1000px;
-  background: var(--accent-color); color: var(--base-color);
-  font: inherit; font-weight: 600; text-transform: uppercase;
-  cursor: pointer; transition: 0.2s ease;
+  margin-top: 10px;
+  padding: .85em 4em;
+  border: none;
+  border-radius: 1000px;
+  background: var(--accent-color);
+  color: var(--base-color);
+  font: inherit;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
 }
-#submit:hover { background: var(--text-color); color: var(--base-color); }
+#submit:hover {
+  background: var(--text-color);
+  color: var(--base-color);
+}
 
 #code {
   color: transparent;
-  user-select: text; -webkit-user-select: text;
-  white-space: pre-wrap; text-align: center;
-  font-size: 1rem; overflow: auto;
+  user-select: text;
+  -webkit-user-select: text;
+  white-space: pre-wrap;
+  text-align: center;
+  font-size: 1rem;
+  overflow: auto;
 }
 
-button, .input-group button, #submit {
-  transition: background 0.2s ease, color 0.2s ease;
+@media (max-width: 768px) {
+  .wrapper { flex: 0 0 65%; }
+  .background { flex: 0 0 35%; }
 }
 
-button:hover, .input-group button:hover, #submit:hover {
-  background: var(--text-color);
-  color: var(--base-color)
+@media (max-width: 480px) {
+  .wrapper { flex: 0 0 70%; }
+  .background { flex: 0 0 30%; }
+  h1 { font-size: 2.5rem; }
 }
