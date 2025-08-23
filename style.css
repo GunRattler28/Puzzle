@@ -7,7 +7,11 @@
   --input-color: #fff;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 html {
   font-family: 'Poppins', sans-serif;
@@ -94,16 +98,28 @@ form {
   overflow: hidden;
   transition: border-color 0.2s ease;
 }
-.input-group:focus-within { border-color: var(--text-color); }
+
+.input-group:focus-within {
+  border-color: var(--text-color);
+}
 
 form label, .input-group button {
   flex-shrink: 0;
-  width: 50px; height: 50px;
+  width: 50px;
+  height: 50px;
   background: var(--accent-color);
-  display: flex; justify-content: center; align-items: center;
-  font-size: 24px; border: none; transition: background 0.2s ease, color 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  border: none;
+  transition: background 0.2s ease, color 0.2s ease;
+  color: var(--text-color); /* Default icon color */
 }
-form label i, .input-group button i { color: var(--text-color); }
+
+form label i, .input-group button i {
+  color: currentColor; /* Inherit parent color */
+}
 
 form input {
   flex: 1;
@@ -116,22 +132,32 @@ form input {
   background: var(--input-color);
 }
 
-.input-group button { cursor: pointer; }
-.input-group button:hover, .input-group button:focus {
+.input-group button {
+  cursor: pointer;
+}
+
+.input-group button:hover,
+.input-group button:focus {
   background: var(--text-color);
   color: var(--base-color);
 }
 
-.input-group.correct { border-color: #0f0; }
-.input-group.correct label, .input-group.correct button {
+.input-group.correct {
+  border-color: #0f0;
+}
+
+.input-group.correct label,
+.input-group.correct button {
   background: #0f0;
   color: var(--text-color);
 }
 
-.input-group.incorrect { border-color: #f00; }
+.input-group.incorrect {
+  border-color: #f00;
+}
+
 .input-group.incorrect label,
-.input-group.incorrect button,
-.input-group.incorrect i {
+.input-group.incorrect button {
   background: #f00;
   color: var(--base-color);
 }
@@ -149,12 +175,8 @@ form input {
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease;
 }
-#submit:hover {
-  background: var(--text-color);
-  color: var(--base-color);
-}
 
-#eye:hover {
+#submit:hover {
   background: var(--text-color);
   color: var(--base-color);
 }
