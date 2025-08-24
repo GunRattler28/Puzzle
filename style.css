@@ -61,11 +61,6 @@ html {
   z-index: 1;
 }
 
-.background a:first-child {
-  opacity: 1;
-  visibility: visible;
-  z-index: 1;
-}
 
 .background img, .bg-layer {
   position: absolute;
