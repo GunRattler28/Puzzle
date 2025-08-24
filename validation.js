@@ -28,10 +28,12 @@ form.addEventListener('submit', async (e) => {
   const userHash = await encryptPassword(password, salt);
   if (userHash === storedHash) {
     inputGroup.className = 'input-group correct';
+    alert('Password correct! Proceeding to next step.');
     changeBackground(passwordStep);
     passwordStep += 1;
   } else {
     inputGroup.className = 'input-group incorrect';
+    alert('Password incorrect! Try again.');
   }
 });
 
