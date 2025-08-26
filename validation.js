@@ -15,10 +15,15 @@ layer1.classList.add('active');
 let passwordStep = 0;
 
 function changeBackground(step) {
-  [layer1, layer2, layer3].forEach(layer => layer.classList.remove('active'));
-  if(step === 0) layer2.classList.add('active');
-  if(step === 1) layer3.classList.add('active');
-  if(step === 2) layer1.classList.add('active'); 
+  const layers = [layer1, layer2, layer3];
+  const current = document.querySelector('.background a.active');
+  const next = layers[step % layers.length];
+  if (current) {
+    current.classList.remove('active');
+    current.classList.add('fading-out');
+    setTimeout(() => current.classList.remove('fading-out'), 2500);
+  }
+  next.classList.add('active');
 }
 
 form.addEventListener('submit', async (e) => {
