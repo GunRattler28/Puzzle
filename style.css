@@ -59,10 +59,9 @@ html {
 }
 
 .background a.fading-out {
+  opacity: 0;
   z-index: 1;
 }
-
-
 
 .background img, .bg-layer {
   position: absolute;

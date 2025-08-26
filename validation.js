@@ -18,12 +18,14 @@ function changeBackground(step) {
   const layers = [layer1, layer2, layer3];
   const current = document.querySelector('.background a.active');
   const next = layers[step % layers.length];
-  if (current) {
-    current.classList.remove('active');
-    current.classList.add('fading-out');
-    setTimeout(() => current.classList.remove('fading-out'), 2500);
-  }
+  if (current === next) return;
   next.classList.add('active');
+  if (current) {
+    current.classList.add('fading-out');
+    setTimeout(() => {
+      current.classList.remove('active', 'fading-out');
+    }, 2500);
+  }
 }
 
 form.addEventListener('submit', async (e) => {
@@ -34,8 +36,8 @@ form.addEventListener('submit', async (e) => {
   if (userHash === storedHash) {
     inputGroup.className = 'input-group correct';
     alert('Password correct! Proceeding to next step.');
-    changeBackground(passwordStep);
     passwordStep += 1;
+    changeBackground(passwordStep);
   } else {
     inputGroup.className = 'input-group incorrect';
     alert('Password incorrect! Try again.');
