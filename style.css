@@ -47,18 +47,15 @@ html {
   inset: 0;
   display: block;
   opacity: 0;
-  visibility: hidden;
-  transition: opacity 4s ease, visibility 0s linear 4s;
+  transition: opacity 2.5s ease-in-out;
   pointer-events: none;
   z-index: 0;
 }
 
 .background a.active {
   opacity: 1;
-  visibility: visible;
-  transition: opacity 4s ease;
-  pointer-events: auto;
   z-index: 1;
+  pointer-events: auto;
 }
 
 
@@ -109,11 +106,11 @@ form label, .input-group button {
   font-size: 24px;
   border: none;
   transition: background 0.2s ease, color 0.2s ease;
-  color: var(--text-color); /* Default icon color */
+  color: var(--text-color);
 }
 
 form label i, .input-group button i {
-  color: currentColor; /* Inherit parent color */
+  color: currentColor;
 }
 
 form input {
