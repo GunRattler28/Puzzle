@@ -56,6 +56,7 @@ html {
 .background a.active {
   opacity: 1;
   z-index: 1;
+  pointer-events: auto;
 }
 
 .background a.fading-out {
