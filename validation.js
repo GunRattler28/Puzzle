@@ -46,6 +46,11 @@ form.addEventListener('submit', async (e) => {
 
 [layer1, layer2, layer3].forEach(layer => {
   layer.addEventListener('click', e => {
-    if (!layer.classList.contains('active')) e.preventDefault();
+    if (!layer.classList.contains('active')) {
+      e.preventDefault();
+    } else {
+      e.preventDefault(); 
+      window.open(layer.href, '_blank');
+    }
   });
 });
