@@ -3,7 +3,8 @@ import { encryptPassword } from './encryption.js';
 const storedPasswords = [
   { salt: "f1e2d3c4b5a60718aabbccddeeff0011", hash: "a950f729eb6bf4813aceb1f710dd164e59dfd9459243e2dd67b8111e60b41b1d" },
   { salt: "2233445566778899aabbccddeeff0011", hash: "322014550cf4dc4563261f4bd4a325d2d93c41d1859fec32ac53d57587eb33ae" },
-  { salt: "99aabbccddeeff001122334455667788", hash: "321aa8faf9ff2c4c991b54b6f64553b912fa088a8a84f6ce2154085921472b48" }
+  { salt: "99aabbccddeeff001122334455667788", hash: "321aa8faf9ff2c4c991b54b6f64553b912fa088a8a84f6ce2154085921472b48" },
+  { salt: "8e4882703df151aef59d718ea1cd3519", hash: "6321bf9a484de3d0698858c87c8d64bb4d67793b7734a1a970bfff7af0b47985" }
 ];
 
 const form = document.getElementById('form');
