@@ -38,6 +38,9 @@ form.addEventListener('submit', async (e) => {
     alert('Password correct! Proceeding to next step.');
     passwordStep += 1;
     changeBackground(passwordStep);
+    if (passwordStep == 2) {
+      console.log("s2UCIJ4_KAo");
+    }
   } else {
     inputGroup.className = 'input-group incorrect';
     alert('Password incorrect! Try again.');
