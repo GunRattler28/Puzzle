@@ -9,17 +9,21 @@ const storedPasswords = [
 
 const form = document.getElementById('form');
 const inputGroup = document.querySelector('.input-group');
-const layer1 = document.getElementById('link1');
-const layer2 = document.getElementById('link2');
-const layer3 = document.getElementById('link3');
-const layer4 = document.getElementById('link4');
-layer1.classList.add('active');
+const layers = [
+  document.getElementById('link1'),
+  document.getElementById('link2'),
+  document.getElementById('link3'),
+  document.getElementById('link4')
+];
+layers[0].classList.add('active');
+
 const title = document.querySelector('h1');
 const codeBlock = document.getElementById('code');
+const submitContainer = document.getElementById('submit-container');
+const submitButton = document.getElementById('submit');
 let passwordStep = 0;
 
 function changeBackground(step) {
-  const layers = [layer1, layer2, layer3, layer4];
   const current = document.querySelector('.background a.active');
   const next = layers[step % layers.length];
   if (current === next) return;
@@ -31,7 +35,77 @@ function changeBackground(step) {
     }, 2500);
   }
 }
-form.addEventListener('submit', async (e) => {
+
+function enableStep3Features() {
+  submitButton.onmousedown = null;
+  document.onmousemove = null;
+  document.onmouseup = null;
+  let isDragging = false;
+  let offsetX = 0, offsetY = 0;
+  const originalLeft = submitButton.offsetLeft - submitContainer.offsetLeft;
+  const originalTop = submitButton.offsetTop - submitContainer.offsetTop;
+  submitButton.style.position = 'absolute';
+  submitButton.style.cursor = 'grab';
+
+  submitButton.onmousedown = e => {
+    isDragging = true;
+    offsetX = e.clientX - submitButton.offsetLeft;
+    offsetY = e.clientY - submitButton.offsetTop;
+    submitButton.style.cursor = 'grabbing';
+  };
+
+  document.onmousemove = e => {
+    if (!isDragging) return;
+    submitButton.style.left = `${e.clientX - offsetX}px`;
+    submitButton.style.top = `${e.clientY - offsetY}px`;
+  };
+
+  document.onmouseup = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    submitButton.style.cursor = 'grab';
+
+    if (!document.getElementById('clueButton')) {
+      const clueButton = document.createElement('button');
+      clueButton.id = 'clueButton';
+      clueButton.type = 'button';
+      clueButton.textContent = 'Clue';
+      clueButton.style.display = 'block';
+      clueButton.style.margin = '10px auto';
+      clueButton.style.padding = '.5em 1em';
+      clueButton.style.borderRadius = '1000px';
+      clueButton.style.background = '#333';
+      clueButton.style.color = '#fff';
+      clueButton.style.border = 'none';
+      clueButton.style.cursor = 'pointer';
+      clueButton.onclick = () => {
+        alert(`Born of ___ and Void
+You shall seal the blinding light that plagues their dreams
+You are the vessel
+You are the Hollow Knight`);
+      };
+      submitContainer.appendChild(clueButton);
+    }
+
+    setTimeout(() => {
+      submitButton.style.transition = "left 0.5s ease, top 0.5s ease";
+      submitButton.style.left = `${originalLeft}px`;
+      submitButton.style.top = `${originalTop}px`;
+      setTimeout(() => submitButton.style.transition = '', 500);
+    }, 3000);
+  };
+
+  codeBlock.textContent = "3. He stands where currents twist and decay lingers, once a loyal sentinel of old. The name he first bore is rarely spoken aloud. Utter it to continue.";
+
+  title.style.cursor = 'pointer';
+  title.onclick = () => {
+    alert("4. So you'd pursue the deeper truth? It isn't one the weak could bear. Prove yourself ready to face it. I'll not hold back. My _____ is lethal and I'd feel no sadness in a weakling's demise. Show me you can accept this Kingdom's past and claim responsibility for its future.");
+  };
+
+  console.log('Step 3 features enabled: draggable submit + clue button.');
+}
+
+form.addEventListener('submit', async e => {
   e.preventDefault();
   const password = document.getElementById('password').value.trim();
   const { salt, hash: storedHash } = storedPasswords[passwordStep];
@@ -39,79 +113,22 @@ form.addEventListener('submit', async (e) => {
   if (userHash === storedHash) {
     inputGroup.className = 'input-group correct';
     alert('Password correct! Proceeding to next step.');
-    passwordStep += 1;
-    changeBackground(passwordStep); 
-    if (passwordStep == 2) {
-      console.log("s2UCIJ4_KAo");
-    } 
-    if (passwordStep == 3) {
-      console.log("Password step 3 reached: draggable submit + clue button");
-      const submitButton = document.querySelector('button[type="submit"]');
-      const originalLeft = submitButton.offsetLeft;
-      const originalTop = submitButton.offsetTop;
-      submitButton.style.position = "absolute";
-      submitButton.style.cursor = "grab";
-      let isDragging = false;
-      let offsetX = 0;
-      let offsetY = 0;
+    passwordStep++;
+    changeBackground(passwordStep);
 
-      submitButton.addEventListener("mousedown", (e) => {
-        isDragging = true;
-        offsetX = e.clientX - submitButton.offsetLeft;
-        offsetY = e.clientY - submitButton.offsetTop;
-        submitButton.style.cursor = "grabbing";
-      });
-
-      document.addEventListener("mousemove", (e) => {
-        if (!isDragging) return;
-        submitButton.style.left = `${e.clientX - offsetX}px`;
-        submitButton.style.top = `${e.clientY - offsetY}px`;
-      });
-
-      document.addEventListener("mouseup", () => {
-        if (!isDragging) return;
-        isDragging = false;
-        submitButton.style.cursor = "grab";
-
-        setTimeout(() => {
-          submitButton.style.left = `${originalLeft}px`;
-          submitButton.style.top = `${originalTop}px`;
-        }, 3000);
-      });
-
-      const clueButton = document.createElement("button");
-      clueButton.type = "button";
-      clueButton.textContent = "Reveal Clue";
-      clueButton.style.display = "block";
-      clueButton.style.marginTop = "10px";
-
-      clueButton.addEventListener("click", () => {
-        alert(`5. Born of ___ and Void
-    You shall seal the blinding light that plagues their dreams
-    You are the vessel 
-    You are the Hollow Knight`);
-      });
-
-      submitButton.insertAdjacentElement("afterend", clueButton);
-      console.log("\n 1. In wilds beyond they speak your name with reverence and regret,\nFor none could tame our ______ souls yet you the challenge met,\nUnder palest watch, you taught, we changed, base instincts were redeemed,\nA world you gave to bug and beast as they had never dreamed.\n");
-      codeBlock.textContent = "3. He stands where currents twist and decay lingers, once a loyal sentinel of old. The name he first bore is rarely spoken aloud. Utter it to continue.";
-      title.style.cursor = 'pointer';
-      title.addEventListener('click', () => {
-      alert("4. So you'd pursue the deeper truth? It isn't one the weak could bear. Prove yourself ready to face it. I'll not hold back. My _____ is lethal and I'd feel no sadness in a weakling's demise. Show me you can accept this Kingdom's past and claim responsibility for its future.");
-      });
-    }
+    if (passwordStep === 2) console.log('s2UCIJ4_KAo');
+    if (passwordStep === 3) enableStep3Features();
   } else {
     inputGroup.className = 'input-group incorrect';
     alert('Password incorrect! Try again.');
   }
 });
 
-[layer1, layer2, layer3, layer4].forEach(layer => {
+layers.forEach(layer => {
   layer.addEventListener('click', e => {
-    if (!layer.classList.contains('active')) {
+    if (!layer.classList.contains('active')) e.preventDefault();
+    else {
       e.preventDefault();
-    } else {
-      e.preventDefault(); 
       window.open(layer.href, '_blank');
     }
   });
