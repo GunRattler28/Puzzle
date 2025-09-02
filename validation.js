@@ -12,11 +12,12 @@ const inputGroup = document.querySelector('.input-group');
 const layer1 = document.getElementById('link1');
 const layer2 = document.getElementById('link2');
 const layer3 = document.getElementById('link3');
+const layer4 = document.getElementById('link4');
 layer1.classList.add('active');
 let passwordStep = 0;
 
 function changeBackground(step) {
-  const layers = [layer1, layer2, layer3];
+  const layers = [layer1, layer2, layer3, layer4];
   const current = document.querySelector('.background a.active');
   const next = layers[step % layers.length];
   if (current === next) return;
@@ -39,7 +40,6 @@ form.addEventListener('submit', async (e) => {
     alert('Password correct! Proceeding to next step.');
     passwordStep += 1;
     changeBackground(passwordStep);
-    clear();
     if (passwordStep == 2) {
       console.log("s2UCIJ4_KAo");
     } 
@@ -52,7 +52,7 @@ form.addEventListener('submit', async (e) => {
   }
 });
 
-[layer1, layer2, layer3].forEach(layer => {
+[layer1, layer2, layer3, layer4].forEach(layer => {
   layer.addEventListener('click', e => {
     if (!layer.classList.contains('active')) {
       e.preventDefault();
