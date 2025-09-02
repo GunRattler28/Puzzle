@@ -42,6 +42,20 @@ function changeBackground(step) {
   }
 }
 
+function showExtraButton() {
+  let extraBtn = document.getElementById('extraButton');
+  if (!extraBtn) {
+    extraBtn = document.createElement('button');
+    extraBtn.id = "extraButton";
+    extraBtn.textContent = "Extra Action";
+    submitBtn.parentNode.appendChild(extraBtn);
+    extraBtn.addEventListener('click', () => {
+      alert("Extra button clicked!");
+    });
+  }
+  extraBtn.classList.add('show');
+}
+
 function startDrag(e) {
   if (passwordStep !== 3) return;
   isDragging = true;
@@ -86,6 +100,7 @@ form.addEventListener('submit', async (e) => {
       console.log("s2UCIJ4_KAo");
     } 
     if (passwordStep == 3) {
+      showExtraButton();
       enableDrag();
       console.log("\n 1. In wilds beyond they speak your name with reverence and regret,\nFor none could tame our ______ souls yet you the challenge met,\nUnder palest watch, you taught, we changed, base instincts were redeemed,\nA world you gave to bug and beast as they had never dreamed.\n");
       codeBlock.textContent = "3. He stands where currents twist and decay lingers, once a loyal sentinel of old. The name he first bore is rarely spoken aloud. Utter it to continue.";

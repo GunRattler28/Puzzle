@@ -183,6 +183,29 @@ form input {
   color: var(--base-color);
 }
 
+#extraButton {
+  display: none;
+  margin-top: 10px;
+  padding: 0.85em 4em;
+  border-radius: 1000px;
+  border: none;
+  background: #00aaff;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease, opacity 0.5s ease;
+}
+
+#extraButton:hover {
+  background: #0080ff;
+}
+
+#extraButton.show {
+  display: block;
+  opacity: 1;
+}
+
 #code {
   color: transparent;
   user-select: text;
