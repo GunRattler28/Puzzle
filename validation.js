@@ -14,6 +14,7 @@ const layer2 = document.getElementById('link2');
 const layer3 = document.getElementById('link3');
 const layer4 = document.getElementById('link4');
 layer1.classList.add('active');
+const title = document.querySelector('h1');
 let passwordStep = 0;
 
 function changeBackground(step) {
