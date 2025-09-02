@@ -48,20 +48,15 @@ function showExtraButton() {
     extraBtn = document.createElement('button');
     extraBtn.id = "extraButton";
     extraBtn.textContent = "Extra Action";
-    submitBtn.parentNode.appendChild(extraBtn);
+    submitBtn.parentNode.insertBefore(extraBtn, submitBtn);
+    const rect = submitBtn.getBoundingClientRect();
+    const parentRect = submitBtn.parentNode.getBoundingClientRect();
+    extraBtn.style.left = `${submitBtn.offsetLeft}px`;
+    extraBtn.style.top = `${submitBtn.offsetTop}px`;
     extraBtn.addEventListener('click', () => {
       alert("Extra button clicked!");
     });
   }
-  extraBtn.classList.add('show');
-}
-
-function startDrag(e) {
-  if (passwordStep !== 3) return;
-  isDragging = true;
-  offsetX = e.clientX - submitBtn.offsetLeft;
-  offsetY = e.clientY - submitBtn.offsetTop;
-  if (snapTimeout) clearTimeout(snapTimeout);
 }
 
 function enableDrag() {

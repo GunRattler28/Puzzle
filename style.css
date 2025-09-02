@@ -161,6 +161,7 @@ form input {
 
 #submit {
   position: relative;
+  z-index: 2;
   margin-top: 10px;
   padding: .85em 4em;
   border: none;
@@ -184,17 +185,19 @@ form input {
 }
 
 #extraButton {
-  display: none;
-  margin-top: 10px;
-  padding: 0.85em 4em;
-  border-radius: 1000px;
+  position: absolute;
+  z-index: 1;
+  padding: .85em 4em;
   border: none;
-  background: #00aaff;
+  border-radius: 1000px;
+  background: #0af;
   color: #fff;
+  font: inherit;
   font-weight: 600;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.2s ease, opacity 0.5s ease;
+  top: 0;
+  left: 0;
 }
 
 #extraButton:hover {
