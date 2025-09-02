@@ -16,7 +16,17 @@ const layer4 = document.getElementById('link4');
 layer1.classList.add('active');
 const title = document.querySelector('h1');
 const codeBlock = document.getElementById('code');
+const submitBtn = document.getElementById('submit');
 let passwordStep = 0;
+let isDragging = false;
+let offsetX = 0;
+let offsetY = 0;
+let originalX = 0;
+let originalY = 0;
+let snapTimeout;
+
+originalX = submitBtn.offsetLeft;
+originalY = submitBtn.offsetTop;
 
 function changeBackground(step) {
   const layers = [layer1, layer2, layer3, layer4];
@@ -31,6 +41,37 @@ function changeBackground(step) {
     }, 2500);
   }
 }
+
+function startDrag(e) {
+  if (passwordStep !== 3) return;
+  isDragging = true;
+  offsetX = e.clientX - submitBtn.offsetLeft;
+  offsetY = e.clientY - submitBtn.offsetTop;
+  if (snapTimeout) clearTimeout(snapTimeout);
+}
+
+function enableDrag() {
+  submitBtn.addEventListener('mousedown', startDrag);
+  document.addEventListener('mousemove', duringDrag);
+  document.addEventListener('mouseup', endDrag);
+}
+
+
+function duringDrag(e) {
+  if (!isDragging || passwordStep !== 3) return;
+  submitBtn.style.left = `${e.clientX - offsetX}px`;
+  submitBtn.style.top = `${e.clientY - offsetY}px`;
+}
+
+function endDrag() {
+  if (!isDragging || passwordStep !== 3) return;
+  isDragging = false;
+  snapTimeout = setTimeout(() => {
+    submitBtn.style.left = `${originalX}px`;
+    submitBtn.style.top = `${originalY}px`;
+  }, 2500);
+}
+
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const password = document.getElementById('password').value.trim();
@@ -45,6 +86,7 @@ form.addEventListener('submit', async (e) => {
       console.log("s2UCIJ4_KAo");
     } 
     if (passwordStep == 3) {
+      enableDrag();
       console.log("\n 1. In wilds beyond they speak your name with reverence and regret,\nFor none could tame our ______ souls yet you the challenge met,\nUnder palest watch, you taught, we changed, base instincts were redeemed,\nA world you gave to bug and beast as they had never dreamed.\n");
       codeBlock.textContent = "3. He stands where currents twist and decay lingers, once a loyal sentinel of old. The name he first bore is rarely spoken aloud. Utter it to continue.";
       title.style.cursor = 'pointer';
