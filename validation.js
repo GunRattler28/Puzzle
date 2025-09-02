@@ -30,41 +30,40 @@ function changeBackground(step) {
   next.classList.add('active');
   if (current) {
     current.classList.add('fading-out');
-    setTimeout(() => {
-      current.classList.remove('active', 'fading-out');
-    }, 2500);
+    setTimeout(() => current.classList.remove('active', 'fading-out'), 2500);
   }
 }
 
 function enableStep3Features() {
-  submitButton.onmousedown = null;
-  document.onmousemove = null;
-  document.onmouseup = null;
   let isDragging = false;
   let offsetX = 0, offsetY = 0;
-  const originalLeft = submitButton.offsetLeft - submitContainer.offsetLeft;
-  const originalTop = submitButton.offsetTop - submitContainer.offsetTop;
+  const containerRect = submitContainer.getBoundingClientRect();
+  const buttonRect = submitButton.getBoundingClientRect();
+  const originalLeft = buttonRect.left - containerRect.left;
+  const originalTop = buttonRect.top - containerRect.top;
+
   submitButton.style.position = 'absolute';
+  submitButton.style.left = `${originalLeft}px`;
+  submitButton.style.top = `${originalTop}px`;
   submitButton.style.cursor = 'grab';
 
   submitButton.onmousedown = e => {
     isDragging = true;
-    offsetX = e.clientX - submitButton.offsetLeft;
-    offsetY = e.clientY - submitButton.offsetTop;
+    offsetX = e.clientX - submitButton.getBoundingClientRect().left;
+    offsetY = e.clientY - submitButton.getBoundingClientRect().top;
     submitButton.style.cursor = 'grabbing';
   };
 
   document.onmousemove = e => {
     if (!isDragging) return;
-    submitButton.style.left = `${e.clientX - offsetX}px`;
-    submitButton.style.top = `${e.clientY - offsetY}px`;
+    submitButton.style.left = `${e.clientX - containerRect.left - offsetX}px`;
+    submitButton.style.top = `${e.clientY - containerRect.top - offsetY}px`;
   };
 
   document.onmouseup = () => {
     if (!isDragging) return;
     isDragging = false;
     submitButton.style.cursor = 'grab';
-
     if (!document.getElementById('clueButton')) {
       const clueButton = document.createElement('button');
       clueButton.id = 'clueButton';
@@ -86,9 +85,8 @@ You are the Hollow Knight`);
       };
       submitContainer.appendChild(clueButton);
     }
-
     setTimeout(() => {
-      submitButton.style.transition = "left 0.5s ease, top 0.5s ease";
+      submitButton.style.transition = 'left 0.5s ease, top 0.5s ease';
       submitButton.style.left = `${originalLeft}px`;
       submitButton.style.top = `${originalTop}px`;
       setTimeout(() => submitButton.style.transition = '', 500);
@@ -101,8 +99,6 @@ You are the Hollow Knight`);
   title.onclick = () => {
     alert("4. So you'd pursue the deeper truth? It isn't one the weak could bear. Prove yourself ready to face it. I'll not hold back. My _____ is lethal and I'd feel no sadness in a weakling's demise. Show me you can accept this Kingdom's past and claim responsibility for its future.");
   };
-
-  console.log('Step 3 features enabled: draggable submit + clue button.');
 }
 
 form.addEventListener('submit', async e => {
@@ -115,7 +111,6 @@ form.addEventListener('submit', async e => {
     alert('Password correct! Proceeding to next step.');
     passwordStep++;
     changeBackground(passwordStep);
-
     if (passwordStep === 2) console.log('s2UCIJ4_KAo');
     if (passwordStep === 3) enableStep3Features();
   } else {
