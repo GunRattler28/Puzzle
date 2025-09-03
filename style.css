@@ -162,6 +162,7 @@ form input {
 
 #submit {
   position: absolute;
+  z-index: 2;
   top: 100%;
   left: 50%;
   transform: translateX(-50%);

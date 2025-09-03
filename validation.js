@@ -21,8 +21,6 @@ let passwordStep = 0;
 let isDragging = false;
 let offsetX = 0;
 let offsetY = 0;
-let originalX = 0;
-let originalY = 0;
 let snapTimeout;
 
 const originalTop = submitBtn.style.top;
@@ -51,7 +49,7 @@ function showClueButton() {
     document.getElementById('submit-container').appendChild(clueButton);
 
     clueButton.addEventListener('click', () => {
-      alert("Born of ___ and Void\nYou shall seal the blinding light that plagues their dreams\nYou are the vessel\nYou are the Hollow Knight");
+      alert("5. Born of ___ and Void\nYou shall seal the blinding light that plagues their dreams\nYou are the vessel\nYou are the Hollow Knight");
     });
     
     setTimeout(() => {
