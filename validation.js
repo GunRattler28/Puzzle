@@ -59,6 +59,14 @@ function showExtraButton() {
   }
 }
 
+function startDrag(e) {
+  if (passwordStep !== 3) return;
+  isDragging = true;
+  offsetX = e.clientX - submitBtn.offsetLeft;
+  offsetY = e.clientY - submitBtn.offsetTop;
+  clearTimeout(snapTimeout);
+}
+
 function enableDrag() {
   submitBtn.addEventListener('mousedown', startDrag);
   document.addEventListener('mousemove', duringDrag);
