@@ -162,8 +162,10 @@ form input {
 
 #submit {
   position: absolute;
-  z-index: 2;
-  margin-top: 10px;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 20px;
   padding: .85em 4em;
   border: none;
   border-radius: 1000px;
@@ -173,7 +175,7 @@ form input {
   font-weight: 600;
   text-transform: uppercase;
   cursor: pointer;
-  transition: left 0.5s ease, top 0.5s ease, background 0.2s ease, color 0.2s ease;
+  transition: left 0.5s ease, top 0.5s ease, transform 0.5s ease, background 0.2s ease, color 0.2s ease;
 }
 
 #submit:active {
@@ -185,9 +187,12 @@ form input {
   color: var(--base-color);
 }
 
-#extraButton {
+#clueButton {
   position: absolute;
-  z-index: 1;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 20px;
   padding: .85em 4em;
   border: none;
   border-radius: 1000px;
@@ -197,17 +202,19 @@ form input {
   font-weight: 600;
   text-transform: uppercase;
   cursor: pointer;
-  top: 0;
-  left: 0;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease, background 0.2s ease;
+  pointer-events: none;
 }
 
-#extraButton:hover {
-  background: #0080ff;
-}
-
-#extraButton.show {
-  display: block;
+#clueButton.show {
   opacity: 1;
+  pointer-events: auto;
+}
+
+#clueButton:hover {
+  background: #0080ff;
 }
 
 #code {
