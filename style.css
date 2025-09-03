@@ -218,6 +218,8 @@ form input {
 }
 
 #code {
+  position: absolute;
+  top: 10%;
   color: transparent;
   user-select: text;
   -webkit-user-select: text;
@@ -225,6 +227,7 @@ form input {
   text-align: center;
   font-size: 1rem;
   overflow: auto;
+  height: 200px;
 }
 
 @media (max-width: 768px) {

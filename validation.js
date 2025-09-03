@@ -25,8 +25,8 @@ let originalX = 0;
 let originalY = 0;
 let snapTimeout;
 
-originalX = submitBtn.offsetLeft;
-originalY = submitBtn.offsetTop;
+const originalTop = submitBtn.style.top;
+const originalLeft = submitBtn.style.left;
 
 function changeBackground(step) {
   const layers = [layer1, layer2, layer3, layer4];
@@ -85,8 +85,8 @@ function endDrag() {
   if (!isDragging || passwordStep !== 3) return;
   isDragging = false;
   snapTimeout = setTimeout(() => {
-    submitBtn.style.left = `${originalX}px`;
-    submitBtn.style.top = `${originalY}px`;
+    submitBtn.style.left = originalLeft;
+    submitBtn.style.top = originalTop;
   }, 2500);
 }
 
