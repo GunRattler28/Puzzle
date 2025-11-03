@@ -1,5 +1,7 @@
 import { encryptPassword } from './encryption.js';
 
+console.log("Check the description")
+
 const storedPasswords = [
   { salt: "f1e2d3c4b5a60718aabbccddeeff0011", hash: "a950f729eb6bf4813aceb1f710dd164e59dfd9459243e2dd67b8111e60b41b1d" },
   { salt: "2233445566778899aabbccddeeff0011", hash: "322014550cf4dc4563261f4bd4a325d2d93c41d1859fec32ac53d57587eb33ae" },
