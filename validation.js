@@ -6,7 +6,8 @@ const storedPasswords = [
   { salt: "f1e2d3c4b5a60718aabbccddeeff0011", hash: "a950f729eb6bf4813aceb1f710dd164e59dfd9459243e2dd67b8111e60b41b1d" },
   { salt: "2233445566778899aabbccddeeff0011", hash: "322014550cf4dc4563261f4bd4a325d2d93c41d1859fec32ac53d57587eb33ae" },
   { salt: "8e4882703df151aef59d718ea1cd3519", hash: "6321bf9a484de3d0698858c87c8d64bb4d67793b7734a1a970bfff7af0b47985" },
-  { salt: "65ffffada8fb4923e3fafc4f4b42a247", hash: "d7c7dbd35443042b5c5aa4bb9174c8654392d202038ce246ba3606c2a291b4ae" }
+  { salt: "65ffffada8fb4923e3fafc4f4b42a247", hash: "d7c7dbd35443042b5c5aa4bb9174c8654392d202038ce246ba3606c2a291b4ae" },
+  { salt: "9c4ef2a1d77b08c3e5bb19fa0c44d62e", hash: "1d2622ec86c0b03321ad2bd373a82a638505623da0c9ed5e033ba2c18e200a20" }
 ];
 
 const form = document.getElementById('form');
@@ -15,6 +16,7 @@ const layer1 = document.getElementById('link1');
 const layer2 = document.getElementById('link2');
 const layer3 = document.getElementById('link3');
 const layer4 = document.getElementById('link4');
+const layer5 = document.getElementById('link5');
 layer1.classList.add('active');
 const title = document.querySelector('h1');
 const codeBlock = document.getElementById('code');
@@ -29,7 +31,7 @@ const originalTop = submitBtn.style.top;
 const originalLeft = submitBtn.style.left;
 
 function changeBackground(step) {
-  const layers = [layer1, layer2, layer3, layer4];
+  const layers = [layer1, layer2, layer3, layer4, layer5];
   const current = document.querySelector('.background a.active');
   const next = layers[step % layers.length];
   if (current === next) return;
@@ -119,7 +121,7 @@ form.addEventListener('submit', async (e) => {
   }
 });
 
-[layer1, layer2, layer3, layer4].forEach(layer => {
+[layer1, layer2, layer3, layer4, layer5].forEach(layer => {
   layer.addEventListener('click', e => {
     if (!layer.classList.contains('active')) {
       e.preventDefault();
