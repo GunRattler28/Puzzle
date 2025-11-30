@@ -100,6 +100,7 @@ form.addEventListener('submit', async (e) => {
   if (userHash === storedHash) {
     inputGroup.className = 'input-group correct';
     alert('Password correct! Proceeding to next step.');
+    document.getElementById('password').value = "";
     passwordStep += 1;
     changeBackground(passwordStep); 
     if (passwordStep == 2) {
@@ -126,6 +127,7 @@ form.addEventListener('submit', async (e) => {
   } else {
     inputGroup.className = 'input-group incorrect';
     alert('Password incorrect! Try again.');
+    document.getElementById('password').value = "";
   }
 });
 
